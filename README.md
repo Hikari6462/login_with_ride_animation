@@ -21,6 +21,6 @@ samples, guidance on mobile development, and a full API reference.
 ## feat(rive): animation added
 [this my first animation in fluttler](https://github.com/Hikari6462/login_with_ride_animation/commit/eb50b004d1ec147301b13285abdee0cf389b16bf)
   <p align="center">  
-<img src="https://github.com/Hikari6462/UPY_Projects/blob/main/pictures/140%20sin%20t%C3%ADtulo.jpg"
+<img src="https://github.com/Hikari6462/Luna-s-Nightmare-Mask/blob/main/artwork/firstanimation.png"
 width="600"></center>  
 </p>  
