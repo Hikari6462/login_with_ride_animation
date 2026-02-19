@@ -17,6 +17,35 @@ class _LoginScreenState extends State<LoginScreen> {
   SMITrigger? _isSuccess; // Agregamos el trigger para éxito
   SMITrigger? _trigFail; // Agregamos el trigger para fallo
 
+
+//1) crear variables para FocusNode
+final _emailFocusNode = FocusNode();
+final _passwordFocusNode = FocusNode();
+
+//2) Listeners para FocusNode (Oyentes/Chismosos)
+
+@override
+void initState() {
+   super.initState();
+  _emailFocusNode.addListener(() {
+    if (_emailFocusNode.hasFocus) {
+      if (_emailFocusNode.hasFocus){
+        //VErifica que no sea nulo
+        if (_isHandsUp  != null) {
+          _isHandsUp?.change(false); // Bajamos las manos
+        }
+      }
+    }
+  
+    }
+  ) 
+  _passwordFocusNode.addListener((){
+    //manos arriba en pasword
+    _isHandsUp?.change(_passwordFocusNode.hasFocus);
+  });
+}
+
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -31,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 width: size.width,
                 height: 250, // Un poco más de espacio para el oso
                 child: RiveAnimation.asset(
-                  'assets/oso.riv',
+                  'assets/animated_login_bear.riv',
                   stateMachines: const ['Login Machine'],
                   onInit: (artboard) {
                     _controller = StateMachineController.fromArtboard(
@@ -61,15 +90,17 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 10),
               //Campo de texto para email
               TextField(
+                //1.3 Asignar FocusNode al TextField
+                focusNode: _emailFocusNode,
                 onChanged: (value) {
                   // Cuando el usuario escribe, el oso mira el campo
                   if (_isHandsUp != null) {
-                    _isHandsUp!.value = false; // Bajamos las manos
+                   // _isHandsUp!.change(false); // Bajamos las manos
                   }
                   // Si el campo no está vacío, el oso mira, si está vacío, el oso baja la mirada
                   if (_isChecking == null) return;
                   // Si el campo tiene texto, el oso mira, si está vacío, el oso baja la mirada
-                  _isChecking!.value = true;
+                  _isChecking!.change(true);
                 },
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
@@ -82,16 +113,18 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 10),
               TextField(
+                //1.3 Asignar FocusNode al TextField
+                focusNode: _passwordFocusNode,
                 onChanged: (value) {
                   // Cuando el usuario escribe, el oso mira el campo
                   if (_isChecking != null) {
                     //No quiero modo chismoso, así que el oso no mira el campo de password, solo baja las manos
-                    _isChecking!.value = false; // Bajamos las manos
+                   // _isChecking!.change(false); // Bajamos las manos
                   }
                   //Si HandsUp es null, salimos para evitar errores
                   if (_isHandsUp == null) return;
                   // Si el campo tiene texto, el oso baja las manos, si está vacío, el oso sube las manos
-                  _isHandsUp!.value = true;
+                  _isHandsUp!.change(true);
                 },
                 onTap: () {
                   // Cuando el usuario va a escribir la clave, el oso se tapa los ojos
@@ -124,6 +157,12 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
       ),
-    );
+    ); 
+  }
+  //1.4 Liberar memoria/recursos al salir de la pantalla
+  @override(){
+    _emailFocusNode.dispose();
+    _passwordFocusNode.dispose();
+    super.dispose();
   }
 }
