@@ -28,7 +28,7 @@ The core logic of this project is located within the `lib/` directory:
 lib/
  ├── main.dart         # Entry point of the application
  └── login_screen.dart # Contains the UI layout and the Rive State Machine controller logic
-
+```
 
 
 ## feat(rive): animation added
