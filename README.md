@@ -38,8 +38,8 @@ lib/
 width="600"></center>  
 </p>  
 
-##🎥 Demo
+## 🎥 Demo
 ![App Demo]([Insert Link to your GIF here])
 
-##🏆 Credits
+## 🏆 Credits
 Animation created by: [Insert Creator's Name Here]([Insert Link to Creator's profile or original Rive file here])
