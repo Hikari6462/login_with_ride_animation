@@ -37,3 +37,9 @@ lib/
 <img src="https://github.com/Hikari6462/Luna-s-Nightmare-Mask/blob/main/artwork/firstanimation.png"
 width="600"></center>  
 </p>  
+
+##🎥 Demo
+![App Demo]([Insert Link to your GIF here])
+
+##🏆 Credits
+Animation created by: [Insert Creator's Name Here]([Insert Link to Creator's profile or original Rive file here])
