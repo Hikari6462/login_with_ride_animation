@@ -31,15 +31,8 @@ lib/
 ```
 
 
-## feat(rive): animation added
-[this my first animation in fluttler](https://github.com/Hikari6462/login_with_ride_animation/commit/eb50b004d1ec147301b13285abdee0cf389b16bf)
-  <p align="center">  
-<img src="https://github.com/Hikari6462/Luna-s-Nightmare-Mask/blob/main/artwork/firstanimation.png"
-width="600"></center>  
-</p>  
-
 ## 🎥 Demo
 ![App Demo](https://github.com/Hikari6462/Personal_Proyects/blob/main/proyects/Rive-Animation-Demo-Perfil-1_-Microsoft_-Edge-2026-02-23-22-07-54.gif)
 
 ## 🏆 Credits
-Animation created by: [Insert Creator's Name Here]([Insert Link to Creator's profile or original Rive file here])
+Animation created by: [@JcToon]([https://rive.app/marketplace/3645-7621-remix-of-login-machine/])
