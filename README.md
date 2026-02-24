@@ -1,7 +1,7 @@
 # 🐻 Interactive Login Screen with Rive
 
-**Subject:** [GRAFICACION]  
-**Professor:** [RODRIGO FIDEL GAXIOLA SOSA]  
+**Subject:** GRAFICACION  
+**Professor:** RODRIGO FIDEL GAXIOLA SOSA.  
 
 
 This repository contains a Flutter login application that features an interactive animated character using Rive. 
