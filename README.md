@@ -35,4 +35,4 @@ lib/
 ![App Demo](https://github.com/Hikari6462/Personal_Proyects/blob/main/proyects/Rive-Animation-Demo-Perfil-1_-Microsoft_-Edge-2026-02-23-22-07-54.gif)
 
 ## 🏆 Credits
-Animation created by: [@JcToon]([https://rive.app/marketplace/3645-7621-remix-of-login-machine/])
+* Animation created by [@JcToon](https://rive.app/marketplace/3645-7621-remix-of-login-machine/)
