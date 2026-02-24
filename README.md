@@ -39,7 +39,7 @@ width="600"></center>
 </p>  
 
 ## 🎥 Demo
-![App Demo]([Insert Link to your GIF here])
+![App Demo](https://github.com/Hikari6462/Personal_Proyects/blob/main/proyects/Rive-Animation-Demo-Perfil-1_-Microsoft_-Edge-2026-02-23-22-07-54.gif)
 
 ## 🏆 Credits
 Animation created by: [Insert Creator's Name Here]([Insert Link to Creator's profile or original Rive file here])
