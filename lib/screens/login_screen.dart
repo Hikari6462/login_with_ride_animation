@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
+import 'dart:async';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -17,9 +18,13 @@ class _LoginScreenState extends State<LoginScreen> {
   SMITrigger? _isSuccess; // Agregamos el trigger para éxito
   SMITrigger? _trigFail; // Agregamos el trigger para fallo
 
+  SMINumber? _numLook;
+
   //1) crear variables para FocusNode
   final _emailFocusNode = FocusNode();
   final _passwordFocusNode = FocusNode();
+
+  Timer? _typingDebounce;
 
   //2) Listeners para FocusNode (Oyentes/Chismosos)
 
@@ -30,6 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
       if (_emailFocusNode.hasFocus) {
         _isHandsUp?.value = false; // Bajamos las manos
       }
+      _numLook?.value = 50.0;
     });
 
     _passwordFocusNode.addListener(() {
@@ -76,6 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     _trigFail = _controller!.findSMI(
                       'trigFail',
                     ); // Para disparar fallo
+                    _numLook = _controller!.findSMI('numLook');
                   },
                 ),
               ),
@@ -86,12 +93,18 @@ class _LoginScreenState extends State<LoginScreen> {
                 focusNode: _emailFocusNode,
                 onChanged: (value) {
                   // Cuando el usuario escribe, el oso mira el campo
-                  if (_isHandsUp != null) {
-                    _isHandsUp!.value = false;
-                  }
-                  if (_isChecking != null) {
-                    _isChecking!.value = value.isNotEmpty;
-                  }
+                  _isHandsUp?.value = false;
+                  _isChecking?.value = value.isNotEmpty;
+
+                  // Lógica para que el oso siga el texto (numLook)
+                  double lookValue = (value.length * 2.0).clamp(0.0, 100.0);
+                  _numLook?.value = lookValue;
+
+                  // Debounce para dejar de mirar después de escribir
+                  _typingDebounce?.cancel();
+                  _typingDebounce = Timer(const Duration(seconds: 2), () {
+                    if (mounted) _isChecking?.value = false;
+                  });
                 },
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
@@ -149,11 +162,12 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  //1.4 Liberar memoria/recursos al salir de la pantalla
+  //1.4 Liberar memoria/recursos al salir de la pantallla
   @override
   void dispose() {
     _emailFocusNode.dispose();
     _passwordFocusNode.dispose();
+    _typingDebounce?.cancel();
     super.dispose();
   }
 }
