@@ -17,34 +17,26 @@ class _LoginScreenState extends State<LoginScreen> {
   SMITrigger? _isSuccess; // Agregamos el trigger para éxito
   SMITrigger? _trigFail; // Agregamos el trigger para fallo
 
+  //1) crear variables para FocusNode
+  final _emailFocusNode = FocusNode();
+  final _passwordFocusNode = FocusNode();
 
-//1) crear variables para FocusNode
-final _emailFocusNode = FocusNode();
-final _passwordFocusNode = FocusNode();
+  //2) Listeners para FocusNode (Oyentes/Chismosos)
 
-//2) Listeners para FocusNode (Oyentes/Chismosos)
-
-@override
-void initState() {
-   super.initState();
-  _emailFocusNode.addListener(() {
-    if (_emailFocusNode.hasFocus) {
-      if (_emailFocusNode.hasFocus){
-        //VErifica que no sea nulo
-        if (_isHandsUp  != null) {
-          _isHandsUp?.change(false); // Bajamos las manos
-        }
+  @override
+  void initState() {
+    super.initState();
+    _emailFocusNode.addListener(() {
+      if (_emailFocusNode.hasFocus) {
+        _isHandsUp?.value = false; // Bajamos las manos
       }
-    }
-  
-    }
-  ) 
-  _passwordFocusNode.addListener((){
-    //manos arriba en pasword
-    _isHandsUp?.change(_passwordFocusNode.hasFocus);
-  });
-}
+    });
 
+    _passwordFocusNode.addListener(() {
+      //manos arriba en pasword
+      _isHandsUp?.value = _passwordFocusNode.hasFocus;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +44,7 @@ void initState() {
 
     return Scaffold(
       body: SafeArea(
-        child: Padding(
+        child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Column(
             children: [
@@ -60,7 +52,7 @@ void initState() {
                 width: size.width,
                 height: 250, // Un poco más de espacio para el oso
                 child: RiveAnimation.asset(
-                  'assets/animated_login_bear.riv',
+                  'assets/oso.riv',
                   stateMachines: const ['Login Machine'],
                   onInit: (artboard) {
                     _controller = StateMachineController.fromArtboard(
@@ -95,12 +87,11 @@ void initState() {
                 onChanged: (value) {
                   // Cuando el usuario escribe, el oso mira el campo
                   if (_isHandsUp != null) {
-                   // _isHandsUp!.change(false); // Bajamos las manos
+                    _isHandsUp!.value = false;
                   }
-                  // Si el campo no está vacío, el oso mira, si está vacío, el oso baja la mirada
-                  if (_isChecking == null) return;
-                  // Si el campo tiene texto, el oso mira, si está vacío, el oso baja la mirada
-                  _isChecking!.change(true);
+                  if (_isChecking != null) {
+                    _isChecking!.value = value.isNotEmpty;
+                  }
                 },
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
@@ -118,13 +109,11 @@ void initState() {
                 onChanged: (value) {
                   // Cuando el usuario escribe, el oso mira el campo
                   if (_isChecking != null) {
-                    //No quiero modo chismoso, así que el oso no mira el campo de password, solo baja las manos
-                   // _isChecking!.change(false); // Bajamos las manos
+                    _isChecking!.value = false;
                   }
-                  //Si HandsUp es null, salimos para evitar errores
-                  if (_isHandsUp == null) return;
-                  // Si el campo tiene texto, el oso baja las manos, si está vacío, el oso sube las manos
-                  _isHandsUp!.change(true);
+                  if (_isHandsUp != null) {
+                    _isHandsUp!.value = true;
+                  }
                 },
                 onTap: () {
                   // Cuando el usuario va a escribir la clave, el oso se tapa los ojos
@@ -157,10 +146,12 @@ void initState() {
           ),
         ),
       ),
-    ); 
+    );
   }
+
   //1.4 Liberar memoria/recursos al salir de la pantalla
-  @override(){
+  @override
+  void dispose() {
     _emailFocusNode.dispose();
     _passwordFocusNode.dispose();
     super.dispose();
