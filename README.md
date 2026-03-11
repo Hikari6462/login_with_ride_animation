@@ -31,9 +31,8 @@ lib/
  └── login_screen.dart # Contains the UI layout and the Rive State Machine controller logic
 ```
 
-
 ## 🎥 Demo
-![App Demo](https://github.com/Hikari6462/Luna-s-Nightmare-Mask/blob/main/artwork/Rive-Animation-Demo-Personal_-Microsoft_-Edge-2026-03-10-20-13-24.gif)
+![App Demo](https://raw.githubusercontent.com/Hikari6462/Luna-s-Nightmare-Mask/main/artwork/Rive-Animation-Demo-Personal_-Microsoft_-Edge-2026-03-10-20-13-24.gif)
 
 ## 🏆 Credits
 * Animation created by [@JcToon](https://rive.app/marketplace/3645-7621-remix-of-login-machine/)
